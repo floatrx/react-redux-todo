@@ -3,13 +3,11 @@ import ReactDOM from 'react-dom';
 
 import './index.scss';
 
-import todos from './todos';
-
 import App from './App';
 // import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
-    <App title="React ToDo" initialData={todos} />,
+    <App title="React ToDo" />,
     document.getElementById('root')
 );
 

@@ -4,10 +4,9 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const fs = require('fs');
 
-const todos = require('./todos');
+const todos = require('./todos.json');
 
-let nextId = todos[todos.length - 1].id + 1;
-
+let nextId = todos.length ? todos[todos.length - 1].id + 1 : 1;
 
 const app = express();
 
@@ -18,6 +17,15 @@ app.use((req, res, next) => {
     next();
 });
 
+// Globaly for todos API
+app.use('/api/todos', function (req, res, next) {
+    next();
+    if (req.method !== 'GET') {
+        fs.writeFile('./api/todos.json', JSON.stringify(todos, null, "\t"), () => {});
+    }
+});
+
+// Check server health
 app.get('/', (req, res) => {
     res.send('👍 API Server works corrected');
 });
@@ -50,6 +58,7 @@ app.put('/api/todos/:id', (req, res) => {
 });
 
 app.patch('/api/todos/:id', (req, res) => {
+
     let todo = todos.find(todo => todo.id == req.params.id);
 
     if (!todo) return res.sendStatus(404);
@@ -60,24 +69,13 @@ app.patch('/api/todos/:id', (req, res) => {
 });
 
 app.delete('/api/todos/:id', (req, res) => {
-    let index = todos.findIndex(todo => todo.id === req.params.id);
+    let index = todos.findIndex(todo => todo.id == req.params.id);
 
     if (index === -1) return res.sendStatus(404);
 
     todos.splice(index, 1);
 
     res.sendStatus(204);
-});
-
-// Save changes to file todos.json
-app.use('/api/todos', function (req, res, next) {
-    next();
-    console.log(req.method);
-    if (req.method !== 'GET') {
-        fs.writeFile('./api/todos.json', JSON.stringify(todos), () => {
-            console.log('Todos has beeen saved...')
-        });
-    }
 });
 
 app.listen(5000, 'localhost');

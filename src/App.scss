@@ -1,10 +1,14 @@
+$background-color: #141524;
+$main-color: #8ac9d3;
+$primary-color: #0AD3AC;
+
 * {
     box-sizing: border-box;
 }
 
 body {
-    background: #0F111A;
-    color: #252525;
+    background: radial-gradient(#371e43, #090B10);
+    color: #fff;
 }
 
 button,
@@ -26,21 +30,18 @@ button {
     align-items: center;
 }
 
-$background-color: #272527;
-$main-color: #fff;
-$primary-color: #0AD3AC;
-
 .todo {
     min-width: 320px;
-    max-width: 860px;
+    max-width: 640px;
     margin: 0 auto;
     background: rgba($background-color, .9);
     color: $main-color;
     border: 1px solid rgba(#fff, .1);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 10px 10px 0 rgba(black, .2);
 
     &__form {
-        border-top: 1px solid rgba(silver, .1);
-        border-bottom: 1px solid rgba(silver, .1);
         padding: 1rem 1rem;
         display: flex;
         background: darken($background-color, 5%);
@@ -52,13 +53,21 @@ $primary-color: #0AD3AC;
         }
 
         &-name {
-            border: 1px solid rgba(silver, .5);
+            border: 1px solid rgba($main-color, .1);
             flex: 1 0 auto;
             margin-right: .5rem;
             transition: all .2s ease;
             font-size: 1.4rem;
-            background: rgba($main-color, .1);
+            background: rgba($main-color, .05);
             color: $main-color;
+
+            &::placeholder {
+                color: rgba($main-color, .3);
+            }
+            &::selection{
+                background: $primary-color;
+                color: #fff;
+            }
 
             &:focus {
                 border-color: $primary-color;
@@ -71,6 +80,11 @@ $primary-color: #0AD3AC;
             text-shadow: 1px 1px rgba($main-color, .4);
             font-weight: bold;
             font-size: 1rem;
+            transition: all .2s ease;
+
+            &:hover {
+                box-shadow: 0 5px 10px -2px rgba($primary-color, .5);
+            }
         }
     }
 
@@ -84,7 +98,6 @@ $primary-color: #0AD3AC;
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
-        border-bottom: 1px solid rgba($main-color, .1);
 
         img {
             width: 3.5ch;
@@ -97,13 +110,15 @@ $primary-color: #0AD3AC;
 
     &__stats {
         user-select: none;
-        background: $background-color;
+        background: darken($background-color, 3%);
         min-width: 160px;
         display: flex;
         justify-content: space-between;
         font-size: .8rem;
         flex-basis: 100%;
         padding: 0 1rem;
+        border-top: 1px solid rgba($main-color, .2);
+        border-bottom: 1px solid rgba($main-color, .1);
 
         .stats {
             &__heading {
@@ -166,11 +181,11 @@ $primary-color: #0AD3AC;
                     &:before,
                     &:after {
                         width: 100%;
-                        transition: width .1s ease-out, transform 0s;
+                        transition: width .15s ease-out, transform 0s;
                     }
 
                     &:before {
-                        transition-delay: .1s;
+                        transition-delay: .075s;
                     }
 
                     &:after {}
@@ -212,13 +227,13 @@ $primary-color: #0AD3AC;
                 width: 0;
                 top: 50%;
                 height: 1px;
-                background: #fff;
+                background: darken($main-color, 15%);
             }
 
             &:before {
                 // right: 0;
                 left: 0;
-                transform: translate(10px, -3px);
+                transform: translate(10px, -5px);
                 // transform: translateX(-4px);
             }
 
@@ -249,6 +264,10 @@ $primary-color: #0AD3AC;
                 text-shadow: none;
                 background: transparent;
                 color: $primary-color;
+                &:hover{
+                    box-shadow: none;
+                    filter: drop-shadow(0 0 10px $primary-color);
+                }
             }
         }
     }

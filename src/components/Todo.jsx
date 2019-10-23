@@ -37,7 +37,7 @@ export default class Todo extends Component {
                 <Checkbox
                     className="todo__checkbox icon"
                     checked={this.props.completed}
-                    onChange={() => this.props.onChange(this.props)}
+                    onChange={() => this.props.onChange(this.props.id)}
                 />
 
                 <span className="todo__title">
@@ -52,7 +52,7 @@ export default class Todo extends Component {
                 <Button
                     className="todo__delete icon"
                     icon="delete"
-                    onClick={() => this.props.onDelete(this.props)}
+                    onClick={() => this.props.onDelete(this.props.id)}
                 />
             </div>
         );
@@ -91,5 +91,5 @@ Todo.propTypes = {
     // Methods
     onChange: PropTypes.func.isRequired,
     onDelete: PropTypes.func.isRequired,
-    onEdit: PropTypes.func.isRequired,
+    onEdit: PropTypes.func.isRequired
 };
