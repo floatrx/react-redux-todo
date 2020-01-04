@@ -1,32 +1,47 @@
 [
 	{
-		"id": 13,
-		"title": "Awesome",
+		"id": 23,
+		"title": "Learn JS",
 		"completed": true
 	},
 	{
-		"id": 14,
-		"title": "Cool",
+		"id": 24,
+		"title": "Learn React",
 		"completed": true
 	},
 	{
-		"id": 15,
-		"title": "New",
+		"id": 28,
+		"title": "Create simple ToDo app",
+		"completed": true
+	},
+	{
+		"id": 29,
+		"title": "Learn Redux",
+		"completed": true
+	},
+	{
+		"id": 30,
+		"title": "Try React+Redux",
+		"completed": true
+	},
+	{
+		"id": 31,
+		"title": "Refactor ToDo app",
+		"completed": true
+	},
+	{
+		"id": 32,
+		"title": "Create another apps...",
 		"completed": false
 	},
 	{
-		"id": 16,
-		"title": "Super-cool",
+		"id": 33,
+		"title": "Make DarkTheme for ToDo app :)",
 		"completed": false
 	},
 	{
-		"id": 17,
-		"title": "Mega-awesome",
-		"completed": false
-	},
-	{
-		"id": 18,
-		"title": "Test something else",
+		"id": 35,
+		"title": "Testing....",
 		"completed": false
 	}
 ]

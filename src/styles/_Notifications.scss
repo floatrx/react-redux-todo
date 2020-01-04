@@ -1,18 +1,4 @@
 // Notifications
-@mixin addNotificationIcon($icon) {
-    .notification-title {
-        padding-left: 1.4rem;
-
-        &::before {
-            content: $icon;
-            position: absolute;
-            left: 1.4rem;
-            top: 1.2rem;
-            font-family: "Font Awesome 5 Pro";
-        }
-    }
-}
-
 .notification-item {
     border: none !important;
     display: block;
@@ -21,6 +7,8 @@
     z-index: 1000;
     overflow: hidden;
     transition: all 0.2s ease;
+    min-width: 130px;
+    max-width: 300px;
 
     &:hover {
         .timer {
@@ -29,13 +17,11 @@
     }
 
     &.notification-danger {
-        @include addNotificationIcon("\f06a");
     }
 
     &.notification-success {
         background: $success-color;
         box-shadow: 1px 3px 14px rgba($success-color, 0.3);
-        @include addNotificationIcon("\f058");
     }
 
     &.notification-info {

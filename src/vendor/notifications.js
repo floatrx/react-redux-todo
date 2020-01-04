@@ -10,9 +10,9 @@ const defaults = {
   type: 'info',
   insert: 'bottom',
   container: 'top-right',
-  // animationIn: ['notifyShow'],
-  // animationOut: ['notifyHide'],
-  width: 320,
+  animationIn: ['notifyShow'],
+  animationOut: ['notifyHide'],
+  // width: 200,
   dismiss: {
     duration: 3000,
     onScreen: true,
@@ -33,7 +33,6 @@ const defaults = {
 };
 
 const notify = (function() {
-
   const show = (options) => {
     store.addNotification({
       ...defaults,
