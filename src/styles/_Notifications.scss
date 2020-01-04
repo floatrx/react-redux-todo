@@ -1,0 +1,82 @@
+// Notifications
+@mixin addNotificationIcon($icon) {
+    .notification-title {
+        padding-left: 1.4rem;
+
+        &::before {
+            content: $icon;
+            position: absolute;
+            left: 1.4rem;
+            top: 1.2rem;
+            font-family: "Font Awesome 5 Pro";
+        }
+    }
+}
+
+.notification-item {
+    border: none !important;
+    display: block;
+    padding: 0.2rem 0.5rem;
+    border-radius: 8px;
+    z-index: 1000;
+    overflow: hidden;
+    transition: all 0.2s ease;
+
+    &:hover {
+        .timer {
+            opacity: 1 !important;
+        }
+    }
+
+    &.notification-danger {
+        @include addNotificationIcon("\f06a");
+    }
+
+    &.notification-success {
+        background: $success-color;
+        box-shadow: 1px 3px 14px rgba($success-color, 0.3);
+        @include addNotificationIcon("\f058");
+    }
+
+    &.notification-info {
+        background: $info-color;
+        box-shadow: 1px 3px 14px rgba($info-color, 0.3);
+    }
+
+    &.notification-error {
+        background: $error-color;
+        box-shadow: 1px 3px 14px rgba($error-color, 0.3);
+    }
+
+    &.notification-warning {
+        background: $warning-color;
+        box-shadow: 1px 3px 14px rgba($warning-color, 0.3);
+    }
+
+    .notification-content {
+        .notification-title {
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .notification-message {
+            line-height: 1.1;
+            font-size: 1.2rem;
+        }
+
+        .timer {
+            background: rgba(black, 0.05);
+            box-shadow: inset 1px 1px 0 rgba(black, 0.05);
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+
+            .timer-filler {
+                background: rgba(white, 0.5);
+            }
+        }
+    }
+}
