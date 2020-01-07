@@ -1,6 +1,7 @@
 // ActionTypes
 import { notify } from '../vendor/notifications';
 import { axios } from '../helpers/axios';
+import { statusActions } from './statusActions';
 
 // Constants
 export const todosConst = {
@@ -12,31 +13,29 @@ export const todosConst = {
 };
 
 // Public
-export const todosActions = {
-  load,
-  add,
-  remove,
-  edit,
-  toggle,
-  complete,
-};
+export const todosActions = { loadTodos, onAdd, onRemove, onEdit, onToggle };
 
 // Actions
-function load() {
+function loadTodos() {
+  const { initSuccess, initFailure } = statusActions;
+
   return (dispatch) => {
     axios
       .get('/api/todos')
 
       .then(({ data: todos }) => {
-        dispatch(loadTodos({ todos }));
+        dispatch(load({ todos }));
+        dispatch(initSuccess());
       })
-      .catch(console.error);
+      .catch(({ message }) => {
+        dispatch(initFailure(new Error('Bad response from REST API server')));
+      });
 
-    const loadTodos = (payload) => ({ type: todosConst.LOAD, payload });
+    const load = (payload) => ({ type: todosConst.LOAD, payload });
   };
 }
 
-function add(title) {
+function onAdd(title) {
   return (dispatch) => {
     axios
       .post('/api/todos', { title })
@@ -51,7 +50,7 @@ function add(title) {
   };
 }
 
-function remove(id) {
+function onRemove(id) {
   return (dispatch) => {
     axios
       .delete(`/api/todos/${id}`)
@@ -66,10 +65,11 @@ function remove(id) {
   };
 }
 
-function edit(id, title) {
+function onEdit(id, title) {
   return (dispatch) => {
     axios
       .put(`/api/todos/${id}`, { title })
+
       .then((response) => {
         dispatch(editTodo({ id, title }));
         notify.success({ title: 'Updated', message: `New title "${title}"` });
@@ -80,21 +80,16 @@ function edit(id, title) {
   };
 }
 
-function toggle(id) {
+function onToggle(id) {
   return (dispatch) => {
     axios
       .patch(`/api/todos/${id}`)
+
       .then(() => {
         dispatch(toggleTodo({ id }));
       })
       .catch(console.error);
 
     const toggleTodo = (payload) => ({ type: todosConst.TOGGLE, payload });
-  };
-}
-
-function complete(id) {
-  return (dispatch) => {
-    // API
   };
 }

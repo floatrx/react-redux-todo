@@ -1,0 +1,276 @@
+.todo {
+    min-width: 320px;
+    max-width: 640px;
+    margin: 3vh auto 0;
+    background: rgba($background-color, 0.9);
+    color: $main-color;
+    border: 1px solid rgba(#fff, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 10px 10px 0 rgba(black, 0.2);
+
+    &__form {
+        padding: 1rem 1rem;
+        display: flex;
+        background: darken($background-color, 5%);
+
+        input,
+        button {
+            padding: 0.4rem 1rem;
+            border-radius: 5px;
+        }
+
+        &-name {
+            border: 1px solid rgba($main-color, 0.1);
+            flex: 1 0 auto;
+            margin-right: 0.5rem;
+            transition: all 0.2s ease;
+            font-size: 1.4rem;
+            background: rgba($main-color, 0.05);
+            color: $main-color;
+
+            &::placeholder {
+                color: rgba($main-color, 0.3);
+            }
+            &::selection {
+                background: $primary-color;
+                color: #fff;
+            }
+
+            &:focus {
+                border-color: $primary-color;
+            }
+        }
+
+        &-submit {
+            background: $primary-color;
+            color: $background-color;
+            text-shadow: 1px 1px rgba($main-color, 0.4);
+            font-weight: bold;
+            font-size: 1rem;
+            transition: all 0.2s ease;
+
+            &:hover {
+                box-shadow: 0 5px 10px -2px rgba($primary-color, 0.5);
+            }
+        }
+    }
+
+    &__heading {
+        background: $background-color;
+        color: $primary-color;
+        padding: 1rem 0.65rem;
+        position: relative;
+        text-align: center;
+        font-size: 1.1rem;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+
+        img {
+            width: 3.5ch;
+        }
+
+        h1 {
+            margin: 0;
+        }
+    }
+
+    &__stats {
+        user-select: none;
+        background: darken($background-color, 3%);
+        min-width: 160px;
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.8rem;
+        flex-basis: 100%;
+        padding: 0 1rem;
+        border-top: 1px solid rgba($main-color, 0.2);
+        border-bottom: 1px solid rgba($main-color, 0.1);
+
+        .stats {
+            &__heading {
+                opacity: 0.5;
+            }
+
+            &__value {
+                font-style: normal;
+                padding: 0 0.5rem;
+                font-weight: bold;
+            }
+
+            &__item {
+                padding: 0.4rem;
+            }
+
+            &-total {
+            }
+
+            &-completed {
+            }
+
+            &-remaining {
+            }
+        }
+
+        span {
+        }
+
+        em {
+        }
+    }
+
+    &__list {
+    }
+
+    // Same
+    &__item,
+    &__edit-form {
+        border-bottom: 1px solid rgba($main-color, 0.1);
+        padding: 1rem;
+    }
+
+    &__item {
+        display: grid;
+        grid-template-columns: 40px 1fr 36px 36px;
+        font-size: 1.5rem;
+        transition: all 0.2s ease;
+        position: relative;
+
+        .icon {
+            user-select: none;
+        }
+
+        &:hover {
+            background: rgba(black, 0.2);
+        }
+
+        &.completed {
+            .todo__title {
+                opacity: 0.2;
+
+                em {
+                    text-decoration: line-through;
+
+                    &:before,
+                    &:after {
+                        width: 100%;
+                        transition: width 0.15s ease-out, transform 0s;
+                    }
+
+                    &:before {
+                        transition-delay: 0.075s;
+                    }
+
+                    &:after {
+                    }
+                }
+            }
+        }
+
+        &:hover {
+            opacity: 1;
+
+            .todo {
+                &__edit,
+                &__delete {
+                    transform: translateX(0) scale(1.1);
+                    opacity: 1;
+                }
+            }
+        }
+    }
+
+    &__title {
+        margin: 0 0.5rem;
+        overflow: hidden;
+
+        em {
+            font-style: normal;
+            display: inline-block;
+            position: relative;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            max-width: 100%;
+
+            &:before,
+            &:after {
+                content: "";
+                position: absolute;
+                width: 0;
+                top: 50%;
+                height: 1px;
+                background: darken($main-color, 15%);
+            }
+
+            &:before {
+                // right: 0;
+                left: 0;
+                transform: translate(10px, -5px);
+                // transform: translateX(-4px);
+            }
+
+            &:after {
+                left: 0;
+                transform: translate(-10px, 5px);
+                // transform: rotate(-2deg) translateX(4px);
+            }
+        }
+    }
+
+    &__edit-form {
+        display: flex;
+        flex-basis: 100%;
+        background: rgba($main-color, 0.1);
+        box-shadow: inset 0 0 0 5px rgba(black, 0.2);
+        border-color: transparent;
+
+        .todo {
+            &__form-name {
+                font-size: 1.5rem;
+                border: none;
+                background: transparent;
+                padding: 0.2rem 0.5rem 0.1rem 1rem;
+            }
+
+            &__form-submit {
+                text-shadow: none;
+                background: transparent;
+                color: $primary-color;
+                &:hover {
+                    box-shadow: none;
+                    filter: drop-shadow(0 0 10px $primary-color);
+                }
+            }
+        }
+    }
+
+    &__checkbox {
+        color: $primary-color;
+
+        i {
+            font-size: 1.8rem;
+        }
+    }
+
+    &__edit,
+    &__delete {
+        transform: translateX(-10px) scale(0.8);
+        transition: all 0.2s ease;
+        opacity: 0;
+    }
+
+    &__edit {
+        color: rgba($main-color, 0.3);
+
+        &:hover {
+            color: $primary-color;
+        }
+    }
+
+    &__delete {
+        color: #e5416c;
+        transition-delay: 0.07s;
+    }
+}

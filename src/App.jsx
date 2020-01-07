@@ -12,19 +12,20 @@ import Stats from './components/Stats';
 import { todosActions } from './actions/todosActions';
 
 import './App.scss';
+import { AppStatus } from './components/AppStatus';
 
 class App extends Component {
   componentDidMount = () => {
-    this.props.load();
+    const { loadTodos } = this.props;
+    loadTodos();
   };
 
   render() {
-    const { todos } = this.props;
+    const { todos, status, onAdd, onToggle, onRemove, onEdit } = this.props;
     return (
       <main className="App todo">
         <Header title={this.props.title} todos={todos} />
         <Stats todos={todos} />
-
         <section className="todo__list">
           {todos.map((todo) => (
             <Todo
@@ -32,14 +33,14 @@ class App extends Component {
               id={todo.id}
               title={todo.title}
               completed={todo.completed}
-              onChange={this.props.toggle}
-              onDelete={this.props.remove}
-              onEdit={this.props.edit}
+              onChange={onToggle}
+              onDelete={onRemove}
+              onEdit={onEdit}
             />
           ))}
         </section>
-
-        <Form onAdd={this.props.add} />
+        <Form onAdd={onAdd} />
+        <AppStatus status={status} />
       </main>
     );
   }
@@ -56,7 +57,7 @@ App.propTypes = {
   ).isRequired,
 };
 
-const mapStateToProps = ({ todos }) => ({ todos });
+const mapStateToProps = ({ todos, status }) => ({ todos, status });
 const mapDispatchToProps = (dispatch) => bindActionCreators(todosActions, dispatch);
 const connectedComponent = connect(mapStateToProps, mapDispatchToProps)(App);
 

@@ -1,7 +1,7 @@
 @keyframes zoomIn {
     from {
         opacity: 0;
-        transform: scale(.9);
+        transform: scale(0.9);
     }
 
     to {
@@ -63,7 +63,7 @@
 @keyframes notifyShow {
     from {
         opacity: 0;
-        transform: scale(.95) translateY(-100px);
+        transform: scale(0.95) translateY(-100px);
     }
 
     to {
@@ -82,16 +82,22 @@
     }
 
     30% {
-        opacity: .9;
+        opacity: 0.9;
         transform: scale(1.1) translateY(20px);
     }
 
     to {
         opacity: 0;
-        transform: scale(.9) translateY(-120px);
+        transform: scale(0.9) translateY(-120px);
     }
 }
 
 .notifyHide {
     animation: notifyHide 0.6s ease-in-out both;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
 }

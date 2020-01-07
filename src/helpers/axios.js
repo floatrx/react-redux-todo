@@ -20,7 +20,7 @@ function successHandler(request) {
 function errorHandler(error) {
   loggerEnabled && console.log('%c⚡️Axios [resp] Failure', styledLog.error, error.message);
   error.message && notify.error({ message: error.message });
-  return error;
+  return Promise.reject(error);
 }
 
 // Logger

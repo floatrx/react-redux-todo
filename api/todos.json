@@ -37,11 +37,16 @@
 	{
 		"id": 33,
 		"title": "Make DarkTheme for ToDo app :)",
-		"completed": false
+		"completed": true
 	},
 	{
 		"id": 35,
 		"title": "Testing....",
-		"completed": false
+		"completed": true
+	},
+	{
+		"id": 36,
+		"title": "Works...",
+		"completed": true
 	}
 ]
