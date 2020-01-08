@@ -2,13 +2,13 @@ import { statusConst } from '../actions/statusActions';
 
 const initialState = {
   isPending: true,
-  message: 'Loading...',
+  message: 'Loading',
 };
 
 export const statusReducer = (state = initialState, { type, message }) => {
   switch (type) {
     case statusConst.FAILURE:
-      return { ...state, message };
+      return { message };
     case statusConst.SUCCESS:
       return {};
     default:

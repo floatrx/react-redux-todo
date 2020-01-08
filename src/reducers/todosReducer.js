@@ -18,12 +18,10 @@ export const todosReducer = (state = initialState, { type, payload }) => {
         return todo;
       });
     case todosConst.TOGGLE:
-      return state.map((todo) => {
-        if (todo.id === payload.id) {
-          todo.completed = !todo.completed;
-        }
-        return todo;
-      });
+      const newState = JSON.parse(JSON.stringify(state));
+      const selectedTodo = newState.find((todo) => todo.id === payload.id); // link to object
+      selectedTodo.completed = !selectedTodo.completed;
+      return newState;
     default:
       return state;
   }

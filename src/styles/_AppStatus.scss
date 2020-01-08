@@ -39,6 +39,7 @@ $spinner-inner: 30px;
         &:after {
             content: "";
             border-top: $spinner-size / 25 solid $primary-color;
+            border-bottom: 1px solid $primary-color;
             width: 100%;
             border-radius: 50%;
             margin-right: 0.5rem;

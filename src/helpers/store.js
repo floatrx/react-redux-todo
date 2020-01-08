@@ -6,18 +6,5 @@ import { rootReducer } from '../reducers';
 const middleware = [thunk];
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-// Store initialState
-const initialState = {
-  todos: [],
-  status: {
-    message: '',
-    isPending: true,
-  },
-};
-
 // Create store
-export const store = createStore(
-  rootReducer,
-  initialState,
-  composeEnhancers(applyMiddleware(...middleware)),
-);
+export const store = createStore(rootReducer, composeEnhancers(applyMiddleware(...middleware)));

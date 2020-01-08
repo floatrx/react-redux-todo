@@ -66,6 +66,7 @@ function onRemove(id) {
 }
 
 function onEdit(id, title) {
+  console.log('HEY');
   return (dispatch) => {
     axios
       .put(`/api/todos/${id}`, { title })
