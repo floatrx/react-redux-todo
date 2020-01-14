@@ -12,7 +12,7 @@ import './index.scss';
 ReactDOM.render(
   <Provider store={store}>
     <Notification />
-    <App title="React ToDo" />
+    <App />
   </Provider>,
   document.getElementById('root'),
 );

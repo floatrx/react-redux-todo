@@ -1,45 +1,46 @@
-import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-
-import { bindActionCreators } from 'redux';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
-import Header from './components/Header';
-import Todo from './components/Todo';
-import Form from './components/Form';
-import Stats from './components/Stats';
-
-import { todosActions } from './actions/todosActions';
+import { AppStatus } from './components/AppStatus';
+import { TodoForm } from './components/TodoForm';
+import { Header } from './components/Header';
+import { Stats } from './components/Stats';
+import { TodoItem } from './components/TodoItem';
+import { todosActions } from './features/todos/todosActions';
 
 import './App.scss';
-import { AppStatus } from './components/AppStatus';
 
-function App(props) {
-  const { getTodos, todos, status, onAdd, onToggle, onRemove, onEdit } = props;
+class App extends Component {
+  componentDidMount() {
+    this.props.getTodos();
+  }
 
-  useEffect(getTodos, []);
-
-  return (
-    <main className="App todo">
-      <Header title={props.title} todos={todos} />
-      <Stats todos={todos} />
-      <section className="todo__list">
-        {todos.map((todo) => (
-          <Todo
-            key={todo.id}
-            id={todo.id}
-            title={todo.title}
-            completed={todo.completed}
-            onChange={onToggle}
-            onDelete={onRemove}
-            onEdit={onEdit}
-          />
-        ))}
-      </section>
-      <Form onAdd={onAdd} />
-      <AppStatus status={status} />
-    </main>
-  );
+  render() {
+    const { todos, status, onAdd, onToggle, onRemove, onEdit } = this.props;
+    return (
+      <main className="App todo">
+        <Header title={this.props.title} todos={todos} />
+        <Stats todos={todos} />
+        <section className="todo__list">
+          {todos.map((todo) => (
+            <TodoItem
+              key={todo.id}
+              id={todo.id}
+              title={todo.title}
+              completed={todo.completed}
+              onChange={onToggle}
+              onDelete={onRemove}
+              onEdit={onEdit}
+            />
+          ))}
+        </section>
+        <TodoForm onAdd={onAdd} />
+        <AppStatus status={status} />
+      </main>
+    );
+  }
 }
 
 App.propTypes = {
@@ -51,9 +52,19 @@ App.propTypes = {
       completed: PropTypes.bool.isRequired,
     }),
   ).isRequired,
+  status: PropTypes.shape({
+    isProcessing: PropTypes.bool.isRequired,
+    message: PropTypes.string,
+  }),
+  getTodos: PropTypes.func.isRequired,
+  onAdd: PropTypes.func.isRequired,
+  onToggle: PropTypes.func.isRequired,
+  onRemove: PropTypes.func.isRequired,
+  onEdit: PropTypes.func.isRequired,
 };
 
 App.defaultProps = {
+  title: 'React Todo',
   todos: [],
 };
 

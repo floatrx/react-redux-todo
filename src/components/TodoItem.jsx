@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Checkbox from './Checkbox';
 import Button from './Button';
 
-export default class Todo extends Component {
+export class TodoItem extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -75,7 +75,7 @@ export default class Todo extends Component {
 }
 
 // PropTypes
-Todo.propTypes = {
+TodoItem.propTypes = {
   id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   completed: PropTypes.bool.isRequired,

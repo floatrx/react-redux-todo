@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import logo from '../logo.svg';
 
-function Header(props) {
+export function Header(props) {
   return (
     <header className="todo__heading">
       <img src={logo} width="80" alt="React logo" />
@@ -16,5 +16,3 @@ Header.propTypes = {
   title: PropTypes.string.isRequired,
   todos: PropTypes.array.isRequired,
 };
-
-export default Header;

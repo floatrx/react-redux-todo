@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import Button from './Button';
 
-export default class Form extends Component {
+export class TodoForm extends Component {
   state = {
     title: '',
   };
@@ -36,6 +36,6 @@ export default class Form extends Component {
   );
 }
 
-Form.propTypes = {
+TodoForm.propTypes = {
   onAdd: PropTypes.func.isRequired,
 };

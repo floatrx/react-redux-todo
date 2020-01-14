@@ -1,7 +1,8 @@
 import { createStore, applyMiddleware, combineReducers, compose } from 'redux';
 import thunk from 'redux-thunk';
 
-import { todosReducer, statusReducer } from '../slices';
+import { todosReducer } from '../features/todos/todosSlice';
+import { statusReducer } from '../features/status/statusSlice';
 
 // Middleware
 const middleware = [thunk];

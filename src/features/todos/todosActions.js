@@ -1,9 +1,9 @@
 // ActionTypes
-import { notify } from '../vendor/notifications';
-import { axios } from '../helpers/axios';
-import { showSpinner, hideSpinner } from '../slices/statusSlice';
+import { notify } from '../../vendor/notifications';
+import { axios } from '../../helpers/axios';
+import { showSpinner, hideSpinner } from '../status/statusSlice';
 
-import { loadTodos, addTodo, removeTodo, editTodo, toggleTodo } from '../slices';
+import { loadTodos, addTodo, removeTodo, editTodo, toggleTodo } from './todosSlice';
 
 // Public
 export const todosActions = { getTodos, onAdd, onRemove, onEdit, onToggle };
@@ -20,7 +20,7 @@ function getTodos() {
         dispatch(loadTodos({ todos }));
       })
       .finally(() => {
-        dispatch(hideSpinner())
+        dispatch(hideSpinner());
       });
   };
 }

@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export default function Stats(props) {
-  let total = props.todos.length;
-  let completed = props.todos.filter((todo) => todo.completed).length;
-  let remaining = total - completed;
+export function Stats(props) {
+  const total = props.todos.length;
+  const completed = props.todos.filter((todo) => todo.completed).length;
+  const remaining = total - completed;
   return (
     <div className="todo__stats">
       <div className="stats__item stats-total">
