@@ -1,37 +1,27 @@
 // ActionTypes
 import { notify } from '../vendor/notifications';
 import { axios } from '../helpers/axios';
-import { statusActions } from './statusActions';
+import { showSpinner, hideSpinner } from '../slices/statusSlice';
 
-// Constants
-export const todosConst = {
-  LOAD: 'TODOS_LOAD',
-  EDIT: 'TODOS_EDIT',
-  TOGGLE: 'TODOS_TOGGLE',
-  REMOVE: 'TODOS_REMOVE',
-  ADD: 'TODOS_ADD',
-};
+import { loadTodos, addTodo, removeTodo, editTodo, toggleTodo } from '../slices';
 
 // Public
-export const todosActions = { loadTodos, onAdd, onRemove, onEdit, onToggle };
+export const todosActions = { getTodos, onAdd, onRemove, onEdit, onToggle };
 
 // Actions
-function loadTodos() {
-  const { initSuccess, initFailure } = statusActions;
-
+function getTodos() {
   return (dispatch) => {
+    dispatch(showSpinner('Loading'));
+
     axios
       .get('/api/todos')
 
       .then(({ data: todos }) => {
-        dispatch(load({ todos }));
-        dispatch(initSuccess());
+        dispatch(loadTodos({ todos }));
       })
-      .catch(({ message }) => {
-        dispatch(initFailure(new Error('Bad response from REST API server')));
+      .finally(() => {
+        dispatch(hideSpinner())
       });
-
-    const load = (payload) => ({ type: todosConst.LOAD, payload });
   };
 }
 
@@ -45,8 +35,6 @@ function onAdd(title) {
         notify.success({ message: 'Created' });
       })
       .catch(console.error);
-
-    const addTodo = (payload) => ({ type: todosConst.ADD, payload });
   };
 }
 
@@ -60,8 +48,6 @@ function onRemove(id) {
         notify.show({ message: 'Deleted' });
       })
       .catch(console.error);
-
-    const removeTodo = (payload) => ({ type: todosConst.REMOVE, payload });
   };
 }
 
@@ -76,8 +62,6 @@ function onEdit(id, title) {
         notify.success({ title: 'Updated', message: `New title "${title}"` });
       })
       .catch(console.error);
-
-    const editTodo = (payload) => ({ type: todosConst.EDIT, payload });
   };
 }
 
@@ -90,7 +74,5 @@ function onToggle(id) {
         dispatch(toggleTodo({ id }));
       })
       .catch(console.error);
-
-    const toggleTodo = (payload) => ({ type: todosConst.TOGGLE, payload });
   };
 }

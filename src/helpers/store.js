@@ -1,10 +1,20 @@
-import { createStore, applyMiddleware, compose } from 'redux';
+import { createStore, applyMiddleware, combineReducers, compose } from 'redux';
 import thunk from 'redux-thunk';
 
-import { rootReducer } from '../reducers';
+import { todosReducer, statusReducer } from '../slices';
 
+// Middleware
 const middleware = [thunk];
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-// Create store
-export const store = createStore(rootReducer, composeEnhancers(applyMiddleware(...middleware)));
+// Reducers
+const rootReducer = combineReducers({
+  todos: todosReducer,
+  status: statusReducer,
+});
+
+// Store
+export const store = createStore(
+  rootReducer,
+  composeEnhancers(applyMiddleware(...middleware)),
+);

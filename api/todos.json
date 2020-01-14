@@ -28,25 +28,5 @@
 		"id": 31,
 		"title": "Refactor ToDo app",
 		"completed": true
-	},
-	{
-		"id": 32,
-		"title": "Create another apps...",
-		"completed": false
-	},
-	{
-		"id": 33,
-		"title": "Make DarkTheme for ToDo app :)",
-		"completed": true
-	},
-	{
-		"id": 35,
-		"title": "Testing....",
-		"completed": true
-	},
-	{
-		"id": 36,
-		"title": "Works...",
-		"completed": true
 	}
 ]

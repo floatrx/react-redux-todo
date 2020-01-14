@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import { bindActionCreators } from 'redux';
@@ -14,36 +14,32 @@ import { todosActions } from './actions/todosActions';
 import './App.scss';
 import { AppStatus } from './components/AppStatus';
 
-class App extends Component {
-  componentDidMount = () => {
-    const { loadTodos } = this.props;
-    loadTodos();
-  };
+function App(props) {
+  const { getTodos, todos, status, onAdd, onToggle, onRemove, onEdit } = props;
 
-  render() {
-    const { todos, status, onAdd, onToggle, onRemove, onEdit } = this.props;
-    return (
-      <main className="App todo">
-        <Header title={this.props.title} todos={todos} />
-        <Stats todos={todos} />
-        <section className="todo__list">
-          {todos.map((todo) => (
-            <Todo
-              key={todo.id}
-              id={todo.id}
-              title={todo.title}
-              completed={todo.completed}
-              onChange={onToggle}
-              onDelete={onRemove}
-              onEdit={onEdit}
-            />
-          ))}
-        </section>
-        <Form onAdd={onAdd} />
-        <AppStatus status={status} />
-      </main>
-    );
-  }
+  useEffect(getTodos, []);
+
+  return (
+    <main className="App todo">
+      <Header title={props.title} todos={todos} />
+      <Stats todos={todos} />
+      <section className="todo__list">
+        {todos.map((todo) => (
+          <Todo
+            key={todo.id}
+            id={todo.id}
+            title={todo.title}
+            completed={todo.completed}
+            onChange={onToggle}
+            onDelete={onRemove}
+            onEdit={onEdit}
+          />
+        ))}
+      </section>
+      <Form onAdd={onAdd} />
+      <AppStatus status={status} />
+    </main>
+  );
 }
 
 App.propTypes = {
@@ -55,6 +51,10 @@ App.propTypes = {
       completed: PropTypes.bool.isRequired,
     }),
   ).isRequired,
+};
+
+App.defaultProps = {
+  todos: [],
 };
 
 const mapStateToProps = ({ todos, status }) => ({ todos, status });

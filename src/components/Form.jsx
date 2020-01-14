@@ -4,12 +4,9 @@ import PropTypes from 'prop-types';
 import Button from './Button';
 
 export default class Form extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      title: '',
-    };
-  }
+  state = {
+    title: '',
+  };
   handleSubmit = (event) => {
     event.preventDefault();
     let title = this.state.title;
@@ -22,23 +19,21 @@ export default class Form extends Component {
     let title = event.target.value;
     this.setState({ title });
   };
-  render() {
-    return (
-      <form className="todo__form" onSubmit={this.handleSubmit}>
-        <input
-          type="text"
-          ref="title"
-          className="todo__form-name"
-          placeholder="What should be done?"
-          value={this.state.title}
-          onChange={this.handleChange}
-        />
-        <Button className="todo__form-submit" type="submit">
-          Add New
-        </Button>
-      </form>
-    );
-  }
+  render = () => (
+    <form className="todo__form" onSubmit={this.handleSubmit}>
+      <input
+        type="text"
+        ref="title"
+        className="todo__form-name"
+        placeholder="What should be done?"
+        value={this.state.title}
+        onChange={this.handleChange}
+      />
+      <Button className="todo__form-submit" type="submit">
+        Add New
+      </Button>
+    </form>
+  );
 }
 
 Form.propTypes = {
